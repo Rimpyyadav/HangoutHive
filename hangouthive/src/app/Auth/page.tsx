@@ -3,21 +3,41 @@
 import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { setDoc, doc } from "firebase/firestore";
+import { useNavigate } from 'react-router-dom';
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
-export default function AuthPage() {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+export default function SignupPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setIsLoading(true)
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    setIsLoading(false)
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      await setDoc(doc(db, "Users", user.uid), {
+        name: name,
+        email: user.email,
+        photo: "",
+      });
+      alert("Signup successful!");
+      navigate('/dashboard'); // Navigate to dashboard after signup
+    } catch (error: any) {
+      alert(error.message); // Show error message in alert
+    } finally {
+      setIsLoading(false);
+    }
   }
+
 
   return (
     <div className="container mx-auto flex h-screen items-center justify-center bg-[#FFF5EB]">
