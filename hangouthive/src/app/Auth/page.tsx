@@ -3,8 +3,8 @@
 import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { setDoc, doc } from "firebase/firestore";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+//import { setDoc, doc } from "firebase/firestore";
+//import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -22,21 +22,21 @@ export default function SignupPage() {
     event.preventDefault();
     setIsLoading(true);
 
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      await setDoc(doc(db, "Users", user.uid), {
-        name: name,
-        email: user.email,
-        photo: "",
-      });
-      alert("Signup successful!");
-      navigate('/dashboard'); // Navigate to dashboard after signup
-    } catch (error: any) {
-      alert(error.message); // Show error message in alert
-    } finally {
-      setIsLoading(false);
-    }
+    // try {
+    //   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    //   const user = userCredential.user;
+    //   await setDoc(doc(db, "Users", user.uid), {
+    //     name: name,
+    //     email: user.email,
+    //     photo: "",
+    //   });
+    //   alert("Signup successful!");
+    //   navigate('/dashboard'); // Navigate to dashboard after signup
+    // } catch (error: any) {
+    //   alert(error.message); // Show error message in alert
+    // } finally {
+    //   setIsLoading(false);
+    // }
   }
 
 
