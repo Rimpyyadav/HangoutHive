@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 //import { setDoc, doc } from "firebase/firestore";
 //import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
@@ -16,7 +16,7 @@ export default function SignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+ // const navigate = useNavigate();
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -54,7 +54,7 @@ export default function SignupPage() {
               <TabsTrigger value="signup">Sign Up</TabsTrigger>
             </TabsList>
             <TabsContent value="login">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={onSubmit}>
                 <div className="grid gap-4">
                   <div className="grid gap-2">
                     <Label htmlFor="email">Email</Label>
@@ -71,7 +71,7 @@ export default function SignupPage() {
               </form>
             </TabsContent>
             <TabsContent value="signup">
-              <form onSubmit={handleSubmit}>
+             <form onSubmit={onSubmit}>
                 <div className="grid gap-4">
                   <div className="grid gap-2">
                     <Label htmlFor="name">Name</Label>
